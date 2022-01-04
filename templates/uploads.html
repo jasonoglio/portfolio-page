@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}
+    Home Page
+{% endblock %}
+
+{% block content %}
+
+<body>
+
+    <p></p>
+
+    <table>
+        <thead>
+            <tr>
+                <!-- Your Columns HERE -->
+                <th scope="col">Column</th>
+                <th scope="col">Title</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Your rows inside the table HERE: -->
+            {% for i in dict_list %}
+                <tr>
+                    <td>{{ i.Column }}</td>
+                    <td>{{ i.Title }}</td>
+                    <td>
+                        <button>Drop</button>
+                        <button>Dummy</button>
+                         <form method="POST" action="delete"> <!-- the 'action' has to match the app route /name -->
+                            <input name="delete" type="submit" value={{ i.Column }}>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+    <br>
+
+    <p align="center">
+
+        <form action="download" method="post">
+            <input type="submit" name="download" value="Download">
+        </form>
+    </p>
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    K means
+{% endblock %}
+
+{% block content %}
+
+<p>
+    <img src="/static/k_means_title_pic.png">
+    <br>
+    <!-- the submit button goes to the uploads page because of the render template command at the end of the upload def in the app.py -->
+        <form method="POST" action="uploads" enctype="multipart/form-data">
+            <p><input type="file" name="file"></p>
+            <p><input type="submit" value="Submit"></p>
+        </form>
+
+</p>
+
+
+
+
+{% endblock %}
