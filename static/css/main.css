@@ -10,6 +10,18 @@ body {
     margin: 0 auto;
 }
 
+.terminal {
+    margin: auto;
+    width: 50%;
+    border: 3px
+    padding: 10px;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+
 header {
     background: #3DBDAC;
 }
@@ -25,8 +37,6 @@ header::after {
     padding: 5px;
 }
 
-
-
 nav ul {
     margin: 0;
     padding: 0;
@@ -37,7 +47,6 @@ nav li {
     display: inline-block;
     margin-left: 60px;
     padding-top: 30px;
-
     position: relative;
 }
 
@@ -54,13 +63,11 @@ nav a:before {
     display: block;
     height: 5px;
     background-color: #03362F;
-
     position: absolute;
     top: 0;
     width: 0%;
 
     transition: all ease-in-out 250ms;
-
 }
 
 nav a:hover::before {
