@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}
+    Process Display
+{% endblock %}
+
+{% block content %}
+<body>
+    <p>
+        <form action="download" method="post">
+            <input type="submit" name="download" value="Download" accept=".xlsx">
+        </form>
+
+        <div>
+            <iframe src="{{ url_for('process')}}" class="terminal"></iframe>
+        </div>
+    </p>
+
+
+
+
+</body>
+</html>
+
+{% endblock %}

@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}
-    Home Page
+    Uploads page
 {% endblock %}
 
 {% block content %}
@@ -27,6 +27,7 @@
                     <td>
                         <button>Drop</button>
                         <button>Dummy</button>
+                            <!-- the delete button runs the 'action' "delete" see form below, in the application.py -->
                          <form method="POST" action="delete"> <!-- the 'action' has to match the app route /name -->
                             <input name="delete" type="submit" value={{ i.Column }}>
                         </form>
@@ -39,11 +40,14 @@
 
     <br>
 
-    <p align="center">
+    <p>
 
-        <form action="download" method="post">
-            <input type="submit" name="download" value="Download">
+        <form action="process_display" method="post">
+            <input type="submit" name="process_display" value="Process File">
         </form>
+
+
+
     </p>
 
 </body>
