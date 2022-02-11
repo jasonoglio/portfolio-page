@@ -86,7 +86,11 @@ def process():
     def generate():
         global df
         global final_df
+        global user
         yield "Running..." + "\n"
+
+
+
 
 
         df_drop = df
@@ -94,7 +98,7 @@ def process():
 
         total_run_list = []
         total_run_count = 0
-        while total_run_count < 11:
+        while total_run_count < 5:
             sil_score = 999999
             elbow_score = 1
             Sum_of_squared_distances = []
@@ -155,25 +159,34 @@ def process():
                 sil_score))
 
             total_run_count += 1
-            yield "data: Run " + str(total_run_count) + "/11 complete" + "\n"
+            yield "data: Run " + str(total_run_count) + "/5 complete" + "\n"
             yield "data: The analysis ran " + str(number_of_runs) + ' times. The recommended cluster count is ' + str(
                 sil_score) + "\n"
             total_run_list.append(sil_score)
             mode_number = mode(total_run_list)
-            if total_run_count == 11:
-                print('Final recommended cluster (mode of 15 complete runs) = ' + str(mode_number))
-                yield "data: Final recommended cluster (mode of 15 complete runs) =  " + str(mode_number)  + "\n"
+            if total_run_count == 5:
+                print('Final recommended cluster (mode of 5 complete runs) = ' + str(mode_number))
+                yield "data: Final recommended cluster (mode of 5 complete runs) =  " + str(mode_number)  + "\n"
 
 
-            km = KMeans(n_clusters=mode_number, max_iter=200, n_init=10)
-            km = km.fit(df_drop_nan)
-            labels = km.predict(df_drop_nan)
-            labels = pd.DataFrame(labels)
-            labels = labels.rename(columns={0: 'labels'})
-            df_drop_nan = df_drop_nan.reset_index(drop=True)
-            df_drop_nan['labels'] = labels['labels']
-            final_df = df_drop_nan
-            yield "You may now Download the results" + "\n"
+                km = KMeans(n_clusters=mode_number, max_iter=200, n_init=10)
+                km = km.fit(df_drop_nan)
+                labels = km.predict(df_drop_nan)
+                labels = pd.DataFrame(labels)
+                labels = labels.rename(columns={0: 'labels'})
+                df_drop_nan = df_drop_nan.reset_index(drop=True)
+                df_drop_nan['labels'] = labels['labels']
+                final_df = df_drop_nan
+
+                user = getpass.getuser()
+                p = 'C:\\Users\\' + user + '\\Downloads\\file_with_cluster.xlsx'
+                print(p)
+                final_df.to_excel(p, sheet_name='Sheet1', index=False)
+                if total_run_count == 5:
+                    print(user)
+                    print("You may now Download the results" + "\n")
+                    yield "You may now Download the results" + "\n"
+
 
     return Response(generate(), mimetype='text/event-stream')
 
